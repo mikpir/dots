@@ -15,7 +15,7 @@ function runSetup() {
         echo "------------------------------"
         echo ""
         curl -#L https://github.com/mikpir/mac/tarball/main | tar -xzv --strip-components 1 \
-            --exclude={README.md,LICENSE,bootstrap.sh}
+            --exclude={README.md}
     fi
 
     # Run sections based on command line arguments
