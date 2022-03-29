@@ -1,11 +1,22 @@
 #!/usr/bin/env bash
 
-function runDots() {
+function runSetup() {
     # Ask for the administrator password upfront
     sudo -v
 
     # Keep-alive: update existing `sudo` time stamp until the script has finished
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+    
+    if [ ! -f "./bootstrap.sh" ]; then
+        echo ""
+        echo "------------------------------"
+        echo "Fetching other files"
+        echo "------------------------------"
+        echo ""
+        curl -#L https://github.com/mikpir/mac/tarball/main | tar -xzv --strip-components 1 \
+            --exclude={README.md,LICENSE,bootstrap.sh}
+    fi
 
     # Run sections based on command line arguments
     for ARG in "$@"
@@ -13,11 +24,10 @@ function runDots() {
         if [ $ARG == "bootstrap" ] || [ $ARG == "all" ]; then
             echo ""
             echo "------------------------------"
-            echo "Syncing the dev-setup repo to your local machine."
+            echo "Copying config files"
             echo "------------------------------"
             echo ""
-            cd ~ && curl -#L https://github.com/mikpir/dev-setup/tarball/master | tar -xzv --strip-components 1 \
-                --exclude={README.md,LICENSE,bootstrap.sh}
+            ./bootstrap.sh
         fi
         if [ $ARG == "osxprep" ] || [ $ARG == "all" ]; then
             echo ""
@@ -49,7 +59,6 @@ function runDots() {
             ./macos.sh
         fi
         if [ $ARG == "npm" ] || [ $ARG == "all" ]; then
-            # Run the web.sh Script
             echo "------------------------------"
             echo "Installing npm"
             echo "------------------------------"
@@ -59,14 +68,14 @@ function runDots() {
     done
 
     echo "------------------------------"
-    echo "Completed running .dots, restart your computer to ensure all updates take effect"
+    echo "Completed running setup, restart your computer to ensure all updates take effect"
     echo "------------------------------"
 }
 
 read -p "This script may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
 echo "";
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    runDots $@
+    runSetup $@
 fi;
 
-unset runDots;
+unset runSetup;
