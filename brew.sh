@@ -4,14 +4,21 @@
 # Install if we don't have it
 if test ! $(which brew); then
   echo "Installing homebrew..."
-  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  NONINTERACTIVE=1 /bin/bash -c \
+    "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/pirhonen/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/pirhonen/.bash_profile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Make sure we’re using the latest Homebrew.
 brew update
 
 # Upgrade any already-installed formulae.
-brew upgrade --all
+brew upgrade
 
 #########################################################################
 # GNU utils
@@ -32,23 +39,21 @@ brew install bash-completion@2
 # We installed the new shell, now we have to activate it
 echo "Adding the newly installed shell to the list of allowed shells"
 # Prompts for password
-sudo bash -c "echo $(brew --prefix bash) >> /etc/shells"
+sudo bash -c "echo $(brew --prefix)/bin/bash >> /etc/shells"
 # Change to the new shell, prompts for password
-chsh -s $(brew --prefix bash)
+# chsh -s "$(brew --prefix)/bin/bash"
 
 # Install `wget` with IRI support.
-brew install wget --with-iri
+brew install wget
 
-brew install homebrew/dupes/grep
 brew install ack
-brew install homebrew/dupes/openssh
 
 #########################################################################
 # Development tools
 #########################################################################
 
 brew install git
-brew install vim --override-system-vi
+brew install vim
 
 brew tap homebrew/cask-fonts
 brew install --cask font-sauce-code-pro-nerd-font
@@ -62,7 +67,7 @@ brew install starship
 
 # brew install homebrew/dupes/screen
 
-# TODO: Install Docker 
+# TODO: Install Docker
 
 #########################################################################
 # Misc

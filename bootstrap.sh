@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
 
 function doIt() {
-    rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" --exclude "brew.sh" \
-        --exclue "macos.sh" --exclue "npm.sh" --exclue "osprep.sh"
-        --exclude "README.md" --exclude "LICENSE" -avh --no-perms . ~;
+    rsync --exclude ".git/" --exclude ".DS_Store" --exclude "*.sh" \
+        --exclude "README.md" --exclude "LICENSE" --exclude "setup" -avh --no-perms . ~;
     source ~/.bash_profile;
+
+    if [ -d  /opt/homebrew ]; then
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/pirhonen/.bash_profile
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
 }
 
 doIt;
