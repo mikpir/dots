@@ -103,3 +103,7 @@ function json() {
         python -mjson.tool | pygmentize -l javascript;
     fi;
 }
+
+function putLine() {
+    grep -qxF "$1" "$2" || echo "$1" >> "$2"
+}

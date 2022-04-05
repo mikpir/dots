@@ -37,18 +37,14 @@ function runSetup() {
             echo ""
             ./osprep.sh
         fi
-        if [ $ARG == "brew" ] || [ $ARG == "all" ]; then
-            # Run the brew.sh Script
-            # For a full listing of installed formulae and apps, refer to
-            # the commented brew.sh source file directly and tweak it to
-            # suit your needs.
+        if [ $ARG == "apps" ] || [ $ARG == "all" ]; then
             echo ""
             echo "------------------------------"
             echo "Installing Homebrew along with some common formulae and apps."
             echo "This might take a while to complete, as some formulae need to be installed from source."
             echo "------------------------------"
             echo ""
-            ./brew.sh
+            ./apps.sh
         fi
         if [ $ARG == "macos" ] || [ $ARG == "all" ]; then
             echo ""
@@ -59,12 +55,20 @@ function runSetup() {
             ./macos.sh
         fi
         if [ $ARG == "npm" ] || [ $ARG == "all" ]; then
-	    echo ""
+	        echo ""
             echo "------------------------------"
             echo "Installing npm"
             echo "------------------------------"
             echo ""
             ./npm.sh
+        fi
+        if [ $ARG == "docker" ] || [ $ARG == "all" ]; then
+	        echo ""
+            echo "------------------------------"
+            echo "Installing docker"
+            echo "------------------------------"
+            echo ""
+            ./docker.sh
         fi
     done
 }
