@@ -83,12 +83,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Properly disable sound on errors on MacVim
-if has("gui_macvim")
-    autocmd GUIEnter * set vb t_vb=
-endif
-
-
 " Add a bit extra margin to the left
 set foldcolumn=1
 
@@ -125,15 +119,14 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git etc. anyway...
+"
 set nobackup
 set nowb
 set noswapfile
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -240,11 +233,6 @@ map 0 ^
 
 inoremap <M-,> <Esc>
 imap jk <Esc>
-" Move a line of text using ALT+[jk] or Command+[jk] on mac
-" nmap <M-j> mz:m+<cr>`z
-" nmap <M-k> mz:m-2<cr>`z
-" vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-" vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " Delete trailing white space on save, useful for some filetypes ;)
 fun! CleanExtraSpaces()
