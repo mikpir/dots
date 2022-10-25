@@ -38,7 +38,7 @@ sudo bash -c "echo $(brew --prefix)/bin/bash >> /etc/shells"
 brew install z
 
 # install z
-grep -qxF ". $(brew --prefix)/etc/profile.d/z.sh" ~/.bashrc || 
+grep -qxF ". $(brew --prefix)/etc/profile.d/z.sh" ~/.bashrc ||
   echo ". $(brew --prefix)/etc/profile.d/z.sh" >> ~/.bashrc
 
 # Install `wget` with IRI support.
@@ -83,3 +83,6 @@ brew install --cask  bitwarden
 
 # Install developer friendly quick look plugins; see https://github.com/sindresorhus/quick-look-plugins
 # brew install --cask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzip qlimagesize webpquicklook suspicious-package quicklookase qlvideo
+
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+
