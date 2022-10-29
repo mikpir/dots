@@ -1,6 +1,9 @@
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don’t want to commit.
+#
+export PATH="/home/pirho/.local/bin:$PATH"
+export XDG_CURRENT_DESKTOP=qtile
 
 for file in ~/.{path,exports,aliases,functions,extra}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
@@ -23,6 +26,15 @@ for option in autocd globstar; do
     shopt -s "$option" 2> /dev/null;
 done;
 
+export EDITOR="/usr/bin/nvim"
+
+[ -f /usr/share/fzf/shell/key-bindings.bash ] && source /usr/share/fzf/shell/key-bindings.bash
+
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
+
+Z_LOCATION=`dnf repoquery -q -l z | grep 'z.sh' | tr -d '\n'`
+source $Z_LOCATION
+
+eval "`starship init bash`"
 

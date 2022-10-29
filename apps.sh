@@ -1,88 +1,39 @@
 #!/usr/bin/env bash
 
-# Check for Homebrew,
-./brew.sh
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Make sure we’re using the latest Homebrew.
-brew update
+sudo dnf upgrade -y
 
-# Upgrade any already-installed formulae.
-brew upgrade
+# Languages
+sudo dnf -y install python3 python3-pip
 
-# No "This app was downloaded from the internet"
-HOMEBREW_CASK_OPTS="--no-quarantine"
+# qtile
+pip install --no-cache-dir cairocffi
+pip install qtile
 #########################################################################
-# GNU utils
-#########################################################################
-# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
-brew install coreutils
-
-# Install some other useful utilities like `sponge`.
-# brew install moreutils
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
-# brew install findutils
-# Install GNU `sed`, overwriting the built-in `sed`.
-# brew install gnu-sed
-
-# Install Bash 4.
-brew install bash
-brew install bash-completion@2
-
-# We installed the new shell, now we have to activate it
-echo "Adding the newly installed shell to the list of allowed shells"
-# Prompts for password
-sudo bash -c "echo $(brew --prefix)/bin/bash >> /etc/shells"
-# Change to the new shell, prompts for password
-# chsh -s "$(brew --prefix)/bin/bash"
-
-brew install z
-
-# install z
-grep -qxF ". $(brew --prefix)/etc/profile.d/z.sh" ~/.bashrc ||
-  echo ". $(brew --prefix)/etc/profile.d/z.sh" >> ~/.bashrc
-
-# Install `wget` with IRI support.
-brew install wget
-
-brew install ack
-
-#########################################################################
-# Development tools
+# Development
 #########################################################################
 
-brew install git
-brew install vim
+sudo dnf install -y nvim kitty starship
 
-brew tap homebrew/cask-fonts
-brew install --cask font-sauce-code-pro-nerd-font
-brew install --cask font-jetbrains-mono-nerd-font
-brew install --cask font-caskaydia-cove-nerd-font
+# Vscode
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+sudo dnf check-update
+sudo dnf install -y code
 
-brew install --cask visual-studio-code
-
-brew install --cask iterm2
-brew install starship
-
-# brew install homebrew/dupes/screen
-
-# TODO: Install Docker
+# Utils
+sudo dnf install -y wl-clipboard fzf z
 
 #########################################################################
-# Misc
+# Flatpaks
 #########################################################################
 
-brew install speedtest_cli
-brew install pandoc
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak install -y com.slack.Slack com.bitwarden.desktop
 
-brew install --cask  alfred
-brew install --cask  macdown
-
-brew install --cask  google-chrome
-brew install --cask  slack
-brew install --cask  bitwarden
-
-# Install developer friendly quick look plugins; see https://github.com/sindresorhus/quick-look-plugins
-# brew install --cask qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzip qlimagesize webpquicklook suspicious-package quicklookase qlvideo
+sudo dnf install -y speedtest-cli pandoc
 
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 
