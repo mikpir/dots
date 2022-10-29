@@ -6,15 +6,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 sudo dnf upgrade -y
 
 # Languages
-sudo dnf -y install python3 python3-pip
-
-# qtile
-pip install --no-cache-dir cairocffi
-pip install qtile
-#########################################################################
-# Development
-#########################################################################
-
+sudo dnf -y install
 sudo dnf install -y nvim kitty starship
 
 # Vscode
