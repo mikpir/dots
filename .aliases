@@ -32,3 +32,5 @@ done
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec $SHELL -l"
+
+alias quit="loginctl terminate-session $XDG_SESSION_ID"
