@@ -8,7 +8,7 @@ function runSetup() {
     while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
     
-    if [ ! -f "./bootstrap.sh" ]; then
+    if [ ! -f "./dots.sh" ]; then
         announce "Fetching other files"
         curl -#L https://github.com/mikpir/mac/tarball/main | tar -xzv --strip-components 1 \
             --exclude={README.md}
