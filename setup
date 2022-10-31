@@ -10,8 +10,7 @@ function runSetup() {
     
     if [ ! -f "./dots.sh" ]; then
         announce "Fetching other files"
-        curl -#L https://github.com/mikpir/mac/tarball/main | tar -xzv --strip-components 1 \
-            --exclude={README.md}
+        curl -#L https://github.com/mikpir/mac/tarball/main | tar -xzv --strip-components 1
     fi
 
     # Run sections based on command line arguments
@@ -43,7 +42,7 @@ function runSetup() {
 function announce() {
     echo ""
     echo "------------------------------"
-    echo $0
+    echo $1
     echo "------------------------------"
     echo ""
 } 
