@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-sudo -v
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 mkdir -p temp-fonts
 cd temp-fonts
 for FONT_NAME in CascadiaCode JetBrainsMono SourceCodePro

@@ -9,11 +9,7 @@ function runSetup() {
 
     
     if [ ! -f "./bootstrap.sh" ]; then
-        echo ""
-        echo "------------------------------"
-        echo "Fetching other files"
-        echo "------------------------------"
-        echo ""
+        announce "Fetching other files"
         curl -#L https://github.com/mikpir/mac/tarball/main | tar -xzv --strip-components 1 \
             --exclude={README.md}
     fi
@@ -21,68 +17,41 @@ function runSetup() {
     # Run sections based on command line arguments
     for ARG in "$@"
     do
-        if [ $ARG == "bootstrap" ] || [ $ARG == "all" ]; then
-            echo ""
-            echo "------------------------------"
-            echo "Copying config files"
-            echo "------------------------------"
-            echo ""
-            ./bootstrap.sh
-        fi
-        if [ $ARG == "osprep" ] || [ $ARG == "all" ]; then
-            echo ""
-            echo "------------------------------"
-            echo "Updating OS and installing Xcode command line tools"
-            echo "------------------------------"
-            echo ""
-            ./osprep.sh
-        fi
         if [ $ARG == "apps" ] || [ $ARG == "all" ]; then
-            echo ""
-            echo "------------------------------"
-            echo "Installing Homebrew along with some common formulae and apps."
-            echo "This might take a while to complete, as some formulae need to be installed from source."
-            echo "------------------------------"
-            echo ""
+            announce "Installing apps."
             ./apps.sh
         fi
-        if [ $ARG == "macos" ] || [ $ARG == "all" ]; then
-            echo ""
-            echo "------------------------------"
-            echo "Setting OSX defaults."
-            echo "------------------------------"
-            echo ""
-            ./macos.sh
-        fi
-        if [ $ARG == "npm" ] || [ $ARG == "all" ]; then
-	        echo ""
-            echo "------------------------------"
-            echo "Installing npm"
-            echo "------------------------------"
-            echo ""
-            ./npm.sh
+        if [ $ARG == "sway" ] || [ $ARG == "all" ]; then
+            announce "Installing sway"
+            ./sway.sh
         fi
         if [ $ARG == "docker" ] || [ $ARG == "all" ]; then
-	        echo ""
-            echo "------------------------------"
-            echo "Installing docker"
-            echo "------------------------------"
-            echo ""
+            announce "Installing docker"
             ./docker.sh
+        fi
+        if [ $ARG == "dots" ] || [ $ARG == "all" ]; then
+            announce "Copying config files"
+            ./dots.sh
+        fi
+        if [ $ARG == "fonts" ] || [ $ARG == "all" ]; then
+            announce "Installing fonts"
+            ./fonts.sh
         fi
     done
 }
+
+function announce() {
+    echo ""
+    echo "------------------------------"
+    echo $0
+    echo "------------------------------"
+    echo ""
+} 
 
 read -p "This script may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
 echo "";
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     runSetup $@
 
-    echo ""
-    echo "------------------------------"
-    echo "Completed running setup, restart your computer to ensure all updates take effect"
-    echo "------------------------------"
-    echo ""
+    announce "Completed running setup, restart your computer to ensure all updates take effect"
 fi;
-
-unset runSetup;

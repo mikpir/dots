@@ -1,5 +1,6 @@
 # Make vim the default editor.
-export EDITOR='vim';
+export EDITOR="/usr/bin/nvim";
+export XDG_CONFIG_HOME="/home/pirho/.config"
 
 # Increase Bash history size. Allow 32³ entries; the default is 500.
 export HISTSIZE='32768';

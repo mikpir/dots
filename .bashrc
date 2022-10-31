@@ -3,9 +3,8 @@
 # * ~/.extra can be used for other settings you don’t want to commit.
 #
 export PATH="/home/pirho/.local/bin:$PATH"
-export XDG_CURRENT_DESKTOP=qtile
 
-for file in ~/.{path,exports,aliases,functions,extra}; do
+for file in ~/.{exports,aliases,functions}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -26,7 +25,9 @@ for option in autocd globstar; do
     shopt -s "$option" 2> /dev/null;
 done;
 
-export EDITOR="/usr/bin/nvim"
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 [ -f /usr/share/fzf/shell/key-bindings.bash ] && source /usr/share/fzf/shell/key-bindings.bash
 
@@ -37,4 +38,3 @@ Z_LOCATION=`dnf repoquery -q -l z | grep 'z.sh' | tr -d '\n'`
 source $Z_LOCATION
 
 eval "`starship init bash`"
-

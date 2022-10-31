@@ -5,6 +5,8 @@
     defaultBranch = main
 [includeIf "gitdir:~/koulu/"]
     path = ~/koulu/.gitconfig
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig
 [core]
 
     # Use custom `.gitignore` and `.gitattributes`
