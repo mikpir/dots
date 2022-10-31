@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function syncDots() {
-    rsync -avh --no-perms dotfiles test_dir;
+    rsync -avh --no-perms dotfiles ~;
     source ~/.bash_profile;
 }
 
