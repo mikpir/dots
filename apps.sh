@@ -14,7 +14,8 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 ### Flatpaks ###
 
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo flatpak install -y com.slack.Slack com.bitwarden.desktop
+sudo flatpak install -y com.slack.Slack com.bitwarden.desktop com.discordapp.Discord com.spotify.Client io.dbeaver.DBeaverCommunity us.zoom.Zoom
+
 
 sudo dnf install -y speedtest-cli pandoc
 
@@ -23,7 +24,11 @@ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-com
 # apps
 sudo dnf in -y \
 brightnessctl speedtest-cli hwinfo neofetch \
-wl-clipboard fzf z \
+grin slurp wl-clipboard fzf z \
 neovim kitty starship \
 python3 \
-code
+yarnpkg \
+code \
+chromedriver google-chrome-stable \
+postgresql
+
