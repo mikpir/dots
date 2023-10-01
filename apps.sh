@@ -8,6 +8,8 @@ sudo dnf up -y
 # sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 # sudo flatpak install -y com.slack.Slack com.bitwarden.desktop com.discordapp.Discord com.spotify.Client io.dbeaver.DBeaverCommunity us.zoom.Zoom
 
+mkdir -p ~/.local/bin
+wget https://raw.githubusercontent.com/rupa/z/master/z.sh -o ~/.local/bin/z.sh
 
 # sudo dnf install -y speedtest-cli pandoc
 

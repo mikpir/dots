@@ -34,7 +34,6 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;
 
-Z_LOCATION=`dnf repoquery -q -l z | grep 'z.sh' | tr -d '\n'`
-source $Z_LOCATION
+source ~/.local/bin/z.sh
 
 eval "`starship init bash`"
