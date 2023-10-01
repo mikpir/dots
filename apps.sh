@@ -12,7 +12,7 @@ mkdir -p ~/.local/bin
 # z
 wget https://raw.githubusercontent.com/rupa/z/master/z.sh -O ~/.local/bin/z.sh
 # starship
-curl -sS https://starship.rs/install.sh | sh
+curl -sS https://starship.rs/install.sh | sh -s -- -y
 
 # sudo dnf install -y speedtest-cli pandoc
 
